@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ark</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/grid.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <!-- Side nagivation -->
+    <div class="side-nav">
+      <div class="close">
+        <i class="ion-ios-close"></i>
+      </div>
+      <ul>
+        <li>
+          <a href="/Ark">
+            <p> HOME <p>
+          </a>
+        </li>
+        <li>
+          <a href="/Ark/queue.html">
+            <p> QUEUE <p>
+          </a>
+        </li>
+        <li>
+          <a href="/Ark/community.php">
+            <p> COMMUNITY PRESETS <p>
+          </a>
+        </li>
+        <li>
+          <a href="/Ark/subPresets.php">
+            <p> SUBSCRIBED PRESETS <p>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main container -->
+    <section class="container grid-12-sm">
+
+      <!-- Header -->
+      <header class="grid-12-sm">
+        <nav class="open grid-1-sm grid-offset-1-sm">
+          <i class="ion-navicon"></i>
+        </nav>
+        <div class="logo grid-offset-7-sm grid-2-sm">
+          <h4> ARK </h4>
+        </div>
+      </header>
+
+      <!-- Printing indication and timer -->
+      <div class="currentPrinting grid-12-sm">
+      </div>
+
+      <!-- Links to pages not in the main side navigation -->
+      <a href="/Ark/newPrint.php">
+        <div class="btn grid-8-sm grid-offset-2-sm">
+          <div class="grid-1-sm grid-offset-2-sm">
+            <i class="ion-ios-printer"></i>
+          </div>
+          <div class="grid-8-sm">
+            <p>START NEW PRINT</p>
+          </div>
+        </div>
+      </a>
+      <a href="/Ark/newPreset.html">
+        <div class="btn grid-8-sm grid-offset-2-sm">
+          <div class="grid-1-sm grid-offset-2-sm">
+            <i class="ion-ios-plus"></i>
+          </div>
+          <div class="grid-8-sm">
+            <p>ADD NEW PRESET</p>
+          </div>
+        </div>
+      </a>
+      <a href="/Ark/queue.html">
+        <div class="btn grid-8-sm grid-offset-2-sm">
+          <div class="grid-1-sm grid-offset-2-sm">
+            <i class="ion-ios-browsers"></i>
+          </div>
+          <div class="grid-8-sm">
+            <p>PRINTING QUEUE</p>
+          </div>
+        </div>
+      </a>
+    </section>
+    <script src="js/nav.js"></script>
+    <script src="js/timer.js"></script>
+    <script>
+      $(function(){
+        printing()
+      })
+
+      /* Function to handle mock printing */
+      let printing=()=>{
+
+        /* Check if local storage is avalible on the browser and give user alert if not */
+        if(window.localStorage){
+
+          /* Check if local storage item is set and populate printing indication div with html and local storage variable */
+          if(localStorage.getItem('name') === null){
+            $('.currentPrinting').html('<div class="loader"><i class="ion-checkmark"></i></div><div class="grid-12-sm title"><h4> NO PRINT IN PROGRESS</h4></div>');
+          }else{
+            $('.currentPrinting').html('<div class="loader time"><time><p>00:00:00</p></time></div><div class="grid-12-sm title"><h4>PRINTING '+localStorage.getItem('name')+'</h4><button class="timer-btn start"><i class="ion-ios-play"></i></button><button class="timer-btn pause"><i class="ion-ios-pause"></i></button><button class="timer-btn stop"><i class="ion-stop"></i></button></div>');
+          }
+        }else{
+          $('.currentPrinting').html('<div class="loader"><i class="ion-checkmark"></i></div><div class="grid-12-sm title"><h4> NO PRINT IN PROGRESS</h4></div>');
+          alert('Some functionality of this application needs local storage, please use a browser that supports local storage');
+        }
+      }
+    </script>
+  </body>
+</html>
